@@ -6,9 +6,10 @@ import AddEditNotes from "./AddEditNotes";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import axios from "axios";
+//import axios from "axios";
 import { toast } from "react-toastify";
 import EmptyCard from "../../components/EmptyCard/EmptyCard";
+import api from "../../api";
 
 const Home = () => {
   const { currentUser, loading, errorDispatch } = useSelector(
@@ -36,7 +37,7 @@ const Home = () => {
   //get all note
   const getAllNotes = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/api/note/all", {
+      const res = await api.get("/api/note/all", {
         withCredentials: true,
       });
       if (res.data.success === false) {
@@ -56,8 +57,8 @@ const Home = () => {
   const deleteNote = async (data) => {
     const noteId = data._id;
     try {
-      const res = await axios.delete(
-        "http://localhost:3001/api/note/delete/" + noteId,
+      const res = await api.delete(
+        "/api/note/delete/" + noteId,
         { withCredentials: true }
       );
       if (res.data.success === false) {
@@ -81,7 +82,7 @@ const Home = () => {
   };
   const onSearchNote = async (query) => {
     try {
-      const res = await axios.get("http://localhost:3001/api/note/search", {
+      const res = await api.get("/api/note/search", {
         params: { query },
         withCredentials: true,
       });
@@ -101,8 +102,8 @@ const Home = () => {
   const updateIsPinned = async (noteData) => {
     const noteId = noteData._id;
     try {
-      const res = await axios.put(
-        "http://localhost:3001/api/note/update-note-pinned/" + noteId,
+      const res = await api.put(
+        "/api/note/update-note-pinned/" + noteId,
         {
           isPinned: !noteData.isPinned,
         },

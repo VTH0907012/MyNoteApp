@@ -8,8 +8,9 @@ import {
   signInStart,
   signInSuccess,
 } from "../../redux/user/userSlice";
-import axios from "axios";
+//import axios from "axios";
 import { toast } from "react-toastify";
+import api from "../../api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -32,8 +33,8 @@ const Login = () => {
     //Login Api
     try {
       dispatch(signInStart());
-      const res = await axios.post(
-        "http://localhost:3001/api/auth/signin",
+      const res = await api.post(
+        "/api/auth/signin",
         {
           email,
           password,

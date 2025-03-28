@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import PasswordInput from "../../components/Input/PasswordInput";
 import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
-import axios from "axios";
+//import axios from "axios";
 import { toast } from "react-toastify";
+import api from "../../api";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -31,8 +32,8 @@ const Signup = () => {
     //Sign up Api
 
     try {
-      const res = await axios.post(
-        "http://localhost:3001/api/auth/signup",
+      const res = await api.post(
+        "/api/auth/signup",
         {
           username: name,
           email,
